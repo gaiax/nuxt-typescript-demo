@@ -1,0 +1,8 @@
+{
+  "name": "nuxt-typescript-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:gaiax/nuxt-typescript-demo.git",
+  "author": "chanyou0311 <yu.nakamura@gaiax.com>",
+  "license": "MIT"
+}
