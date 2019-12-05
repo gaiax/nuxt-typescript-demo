@@ -1,72 +1,40 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        nuxt-typescript-demo
-      </h1>
-      <h2 class="subtitle">
-        My incredible Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div>
+    <h1>Search Google Books</h1>
+    <input type="text" v-model="searchText" placeholder="Python入門" />
+    <p>検索タイトル: {{ searchText }}</p>
+    <ul>
+      <li :key="volume.id" v-for="volume in volumes">
+        <a :href="volume.volumeInfo.infoLink">{{ volume.volumeInfo.title }}</a>
+      </li>
+    </ul>
   </div>
 </template>
-
 <script>
-import Logo from '~/components/Logo.vue'
+import axios from "axios";
 
 export default {
-  components: {
-    Logo
+  data() {
+    return { searchText: "", volumes: [] };
+  },
+  methods: {
+    async getVolumes(searchText) {
+      this.volumes = await axios
+        .get("https://www.googleapis.com/books/v1/volumes/?q=" + searchText)
+        .then(res => {
+          return res.data.items;
+        })
+        .catch(e => {
+          error({ statusCode: 404, message: "ページが見つかりません" });
+        });
+    }
+  },
+  watch: {
+    searchText: function(newSearchText, oldSearchText) {
+      this.getVolumes(newSearchText);
+    }
   }
-}
+};
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
+<style></style>
