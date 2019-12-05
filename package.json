@@ -1,8 +1,17 @@
 {
   "name": "nuxt-typescript-demo",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:gaiax/nuxt-typescript-demo.git",
-  "author": "chanyou0311 <yu.nakamura@gaiax.com>",
-  "license": "MIT"
+  "description": "My incredible Nuxt.js project",
+  "author": "chanyou0311",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {}
 }
