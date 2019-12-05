@@ -14,5 +14,7 @@
     "@nuxtjs/axios": "^5.8.0",
     "nuxt": "^2.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "firebase-tools": "^7.9.0"
+  }
 }
