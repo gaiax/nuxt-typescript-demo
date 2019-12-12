@@ -131,7 +131,7 @@ type Volume = {
 
 export default {
   data() {
-    return { searchText: "", volumes: [] };
+    return { searchText: "" as string, volumes: [] as Array<Volume> };
   },
   methods: {
     async getVolumes(searchText: string) {
@@ -143,6 +143,7 @@ export default {
         })
         .catch(e => {
           console.error({ statusCode: 404, message: "ページが見つかりません" });
+          return this.volumes;
         });
     }
   },
